@@ -28,6 +28,7 @@ public class DateTest extends AbstractTest {
     validateDate("2009-10-10", 10, 10, 2009);
     validateDate("1980-1-2", 1, 2, 1980);
     validateDate("12/12/12", 12, 12, 2012);
+    validateDate("23-02-2012", 02, 23, 2012);
     validateDate("3/4", 3, 4, Calendar.getInstance().get(Calendar.YEAR));
     validateDate("sun, 11/21/2010", 11, 21, 2010);
     validateDate("in october 2006", 10, 1, 2006);

@@ -345,15 +345,19 @@ formal_date
   | relaxed_day_of_week? formal_year_four_digits formal_date_separator (formal_month_of_year | relaxed_month) formal_date_separator formal_day_of_month
       -> ^(EXPLICIT_DATE formal_month_of_year? relaxed_month? formal_day_of_month relaxed_day_of_week? formal_year_four_digits)
       
-  // year last: 1/02/1980, 2/28/79.  2 or 4 digit year is acceptable 
+  // year last: 1/02/1980, 2/28/79.  2 or 4 digit year is acceptable
   | relaxed_day_of_week? formal_month_of_year formal_date_separator formal_day_of_month (formal_date_separator formal_year)?
       -> ^(EXPLICIT_DATE formal_month_of_year formal_day_of_month relaxed_day_of_week? formal_year?)
 
   // 15-Apr-2014
   | formal_day_of_month formal_date_separator relaxed_month (formal_date_separator formal_year_four_digits)?
       -> ^(EXPLICIT_DATE relaxed_month formal_day_of_month formal_year_four_digits?)
-  ;
-  
+
+  // year last: 28/2/79.  2 or 4 digit year is acceptable
+  | relaxed_day_of_week? formal_day_of_month formal_date_separator formal_month_of_year (formal_date_separator formal_year)?
+      -> ^(EXPLICIT_DATE formal_month_of_year formal_day_of_month relaxed_day_of_week? formal_year?)
+   ;
+
 formal_month_of_year
   : int_01_to_12_optional_prefix -> ^(MONTH_OF_YEAR int_01_to_12_optional_prefix)
   ;
